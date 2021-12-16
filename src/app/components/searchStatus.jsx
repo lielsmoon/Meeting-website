@@ -23,9 +23,8 @@ const SearchStatus = ({ length }) => {
         </h2>
     );
 };
-
 SearchStatus.propTypes = {
-    length: PropTypes.number.isRequired
+    length: PropTypes.number
 };
 
 export default SearchStatus;
