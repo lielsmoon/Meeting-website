@@ -31,13 +31,14 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     const handleSort = (item) => {
         setSortBy(item);
+        console.log(item);
     };
     const filteredUsers = selectedProf
         ? allUsers.filter((user) => user.profession._id === selectedProf._id)
         : allUsers;
     const count = filteredUsers.length;
 
-    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
 
     const usersCrop = paginate(sortedUsers, currentPage, pageSize);
 

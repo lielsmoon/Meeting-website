@@ -12,6 +12,16 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             onSort({ path: item, order: "asc" });
         }
     };
+    const handlePointer = (currentPath) => {
+        if (selectedSort.path === currentPath) {
+            if (selectedSort.order === "asc") {
+                return <i className="bi bi-caret-up-fill"></i>;
+            } else {
+                return <i className="bi bi-caret-down-fill"></i>;
+            }
+        }
+        return null;
+    };
     return (
         <thead>
             <tr>
@@ -27,6 +37,8 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                         scope="col"
                     >
                         {columns[column].name}
+                        {columns[column].path &&
+                            handlePointer(columns[column].path)}
                     </th>
                 ))}
             </tr>
