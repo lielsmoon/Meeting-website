@@ -9,11 +9,10 @@ const UserTable = ({
     onSort,
     selectedSort,
     onToggleBookMark,
-    onDelete,
-    ...rest
+    onDelete
 }) => {
     const columns = {
-        name: { path: "name", name: "Имя" },
+        name: { path: "name", name: "Имя", anchor: true },
         qualities: {
             name: "Качество",
             component: (user) => <QualitiesList qualities={user.qualities} />
