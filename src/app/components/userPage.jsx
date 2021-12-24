@@ -8,7 +8,6 @@ const UserPage = ({ id }) => {
     useEffect(() => {
         api.users.getById(id).then((data) => setUser(data));
     }, []);
-    console.log(user);
     const history = useHistory();
     const handleRetern = () => {
         history.replace("/users");
