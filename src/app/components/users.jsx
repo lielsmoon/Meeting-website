@@ -26,7 +26,7 @@ const Users = () => {
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
     };
-
+    console.log(users);
     const handleToggleBookMark = (id) => {
         setUsers(
             users.map((user) => {
