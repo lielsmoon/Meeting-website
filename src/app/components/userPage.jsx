@@ -33,7 +33,7 @@ const UserPage = ({ id }) => {
             </div>
         );
     };
-    return <>{user && (user ? handleUsers(user) : <Loader />)}</>;
+    return <>{user ? handleUsers(user) : <Loader />}</>;
 };
 UserPage.propTypes = {
     id: PropTypes.string
