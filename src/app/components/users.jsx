@@ -13,6 +13,7 @@ const Users = () => {
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const [users, setUsers] = useState();
+    const [search, setSearch] = useState("");
     const pageSize = 8;
     const loading = (
         <div className="spinner-grow" role="status">
@@ -46,11 +47,19 @@ const Users = () => {
         setCurrentPage(1);
     }, [selectedProf]);
 
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+    };
+    console.log(search);
+
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
 
     const handleProfessionSelect = (item) => {
+        if (search !== "") {
+            setSearch("");
+        }
         setSelectedProf(item);
     };
 
@@ -59,7 +68,11 @@ const Users = () => {
     };
 
     if (users) {
-        const filteredUsers = selectedProf
+        const filteredUsers = search
+            ? users.filter((user) =>
+                  user.name.toLowerCase().includes(search.toLowerCase())
+              )
+            : selectedProf
             ? users.filter((user) => user.profession._id === selectedProf._id)
             : users;
 
@@ -96,6 +109,13 @@ const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
+                    <input
+                        type="search"
+                        placeholder="Search..."
+                        className="w-100"
+                        onChange={handleSearch}
+                        value={search}
+                    />
 
                     {count > 0 && (
                         <UserTable
