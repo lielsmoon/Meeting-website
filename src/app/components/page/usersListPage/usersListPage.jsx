@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { paginate } from "../utils/paginate";
-import Pagination from "./pagination";
-import UserTable from "./usersTable";
-import GroupList from "./groupList";
-import api from "../api";
-import SearchStatus from "./searchStatus";
+import { paginate } from "../../../utils/paginate";
+import Pagination from "../../common/pagination";
+import UserTable from "../../ui/usersTable";
+import GroupList from "../../common/groupList";
+import api from "../../../api";
+import SearchStatus from "../../ui/searchStatus";
 import _ from "lodash";
-const Users = () => {
+const UsersListPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
@@ -47,8 +47,9 @@ const Users = () => {
         setCurrentPage(1);
     }, [selectedProf]);
 
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
+    const handleSearch = ({ target }) => {
+        setSelectedProf(undefined);
+        setSearch(target.value);
     };
     console.log(search);
 
@@ -140,8 +141,8 @@ const Users = () => {
     }
     return loading;
 };
-Users.propTypes = {
+UsersListPage.propTypes = {
     users: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
-export default Users;
+export default UsersListPage;
