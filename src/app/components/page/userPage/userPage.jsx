@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import api from "../../../api";
-import { useHistory } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Qualities from "../../ui/qualities";
 
 const UserPage = ({ id }) => {
+    const { userId } = useParams();
     const [user, setUser] = useState();
     useEffect(() => {
         api.users.getById(id).then((data) => setUser(data));
     }, []);
-    const history = useHistory();
-    const handleRetern = () => {
-        history.replace(`/users/${id}/edit`);
-    };
+    // const history = useHistory();
+    // const handleRetern = () => {
+    //     history.replace("/users");
+    // };
 
     if (user) {
+        console.log(user.qualities);
         return (
             <div>
                 <h1>{user.name}</h1>
@@ -22,7 +24,9 @@ const UserPage = ({ id }) => {
                 <Qualities qualities={user.qualities} />
                 <p>{`Количество встреч: ${user.completedMeetings}`}</p>
                 <p>{`Оценка: ${user.rate}`}</p>
-                <button onClick={handleRetern}>Изменить</button>
+                <Link to={`/users/${userId}/edit`}>
+                    <button>Изменить</button>
+                </Link>
             </div>
         );
     } else {
