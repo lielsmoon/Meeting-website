@@ -1,39 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import api from "../../../api";
-import { useParams, Link } from "react-router-dom";
-import Qualities from "../../ui/qualities";
+import UserCard from "../../ui/userCard";
+import QualitiesCard from "../../ui/qualitiesCard";
+import MeetingsCard from "../../ui/meetingsCard";
+import Comments from "../../ui/comments";
 
-const UserPage = ({ id }) => {
-    const { userId } = useParams();
+const UserPage = ({ userId }) => {
     const [user, setUser] = useState();
     useEffect(() => {
-        api.users.getById(id).then((data) => setUser(data));
+        api.users.getById(userId).then((data) => setUser(data));
     }, []);
-    // const history = useHistory();
-    // const handleRetern = () => {
-    //     history.replace("/users");
-    // };
-
     if (user) {
-        console.log(user.qualities);
         return (
-            <div>
-                <h1>{user.name}</h1>
-                <div>{`Профессия: ${user.profession.name}`}</div>
-                <Qualities qualities={user.qualities} />
-                <p>{`Количество встреч: ${user.completedMeetings}`}</p>
-                <p>{`Оценка: ${user.rate}`}</p>
-                <Link to={`/users/${userId}/edit`}>
-                    <button>Изменить</button>
-                </Link>
+            <div className="container">
+                <div className="row gutters-sm">
+                    <div className="col-md-4 mb-3">
+                        <UserCard user={user} />
+                        <QualitiesCard data={user.qualities} />
+                        <MeetingsCard value={user.completedMeetings} />
+                    </div>
+                    <div className="col-md-8">
+                        <Comments />
+                    </div>
+                </div>
             </div>
         );
     } else {
         return <h1>Loading</h1>;
     }
 };
+
 UserPage.propTypes = {
-    id: PropTypes.string
+    userId: PropTypes.string.isRequired
 };
+
 export default UserPage;

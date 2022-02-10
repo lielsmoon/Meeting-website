@@ -9,7 +9,6 @@ export function validator(data, config) {
                 } else {
                     statusValidate = data.trim() === "";
                 }
-
                 break;
             }
             case "isEmail": {

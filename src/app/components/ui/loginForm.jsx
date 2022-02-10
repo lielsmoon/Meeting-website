@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import TextField from "../common/form/textField";
+import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
+import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 
 const LoginForm = () => {
@@ -16,27 +16,27 @@ const LoginForm = () => {
             [target.name]: target.value
         }));
     };
-
     const validatorConfig = {
         email: {
             isRequired: {
-                message: "Электронная почта обязательная для заполения"
+                message: "Электронная почта обязательна для заполнения"
             },
             isEmail: {
-                message: "Email введен некорректно!"
+                message: "Email введен некорректно"
             }
         },
         password: {
-            isRequired: { message: "Пароль обязателен для заполения" },
+            isRequired: {
+                message: "Пароль обязателен для заполнения"
+            },
             isCapitalSymbol: {
-                message:
-                    "Пароль должен содержать как минимум одну заглавную букву"
+                message: "Пароль должен содержать хотя бы одну заглавную букву"
             },
             isContainDigit: {
-                message: "Пароль должен содержать минимум одну цифру"
+                message: "Пароль должен содержать хотя бы одно число"
             },
             min: {
-                message: "Пароль должен содержать минимум 8 символов",
+                message: "Пароль должен состоять минимум из 8 символов",
                 value: 8
             }
         }
@@ -82,9 +82,9 @@ const LoginForm = () => {
                 Оставаться в системе
             </CheckBoxField>
             <button
+                className="btn btn-primary w-100 mx-auto"
                 type="submit"
                 disabled={!isValid}
-                className="btn btn-primary w-100 mx-auto"
             >
                 Submit
             </button>

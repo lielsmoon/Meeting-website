@@ -17,9 +17,9 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
         <div className="mb-4">
             <label className="form-label">{label}</label>
             <Select
-                defaultValue={defaultValue}
                 isMulti
                 closeMenuOnSelect={false}
+                defaultValue={defaultValue}
                 options={optionsArray}
                 className="basic-multi-select"
                 classNamePrefix="select"
@@ -29,7 +29,6 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
         </div>
     );
 };
-
 MultiSelectField.propTypes = {
     options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     onChange: PropTypes.func,
@@ -37,4 +36,5 @@ MultiSelectField.propTypes = {
     label: PropTypes.string,
     defaultValue: PropTypes.array
 };
+
 export default MultiSelectField;

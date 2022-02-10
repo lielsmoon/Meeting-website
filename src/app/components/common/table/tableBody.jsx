@@ -11,9 +11,6 @@ const TableBody = ({ data, columns }) => {
             }
             return component;
         }
-        if (columns[column].anchor) {
-            return <a href={`users/${item._id}`}>{item.name}</a>;
-        }
         return _.get(item, columns[column].path);
     };
     return (
